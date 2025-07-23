@@ -117,97 +117,97 @@ const demos = [
       },
     ],
   },
-  // {
-  //   name: 'Layouts',
-  //   items: [
-  //     {
-  //       slug: 'layouts',
-  //       name: 'Nested Layouts',
-  //       description: 'Create UI that is shared across routes',
-  //     },
-  //     {
-  //       slug: 'route-groups',
-  //       name: 'Route Groups',
-  //       description: 'Organize routes without affecting URL paths',
-  //     },
-  //     {
-  //       slug: 'parallel-routes',
-  //       name: 'Parallel Routes',
-  //       description: 'Render multiple pages in the same layout',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'File Conventions',
-  //   items: [
-  //     {
-  //       slug: 'loading',
-  //       name: 'Loading',
-  //       description:
-  //         'Create meaningful Loading UI for specific parts of an app',
-  //     },
-  //     {
-  //       slug: 'error',
-  //       name: 'Error',
-  //       description: 'Create Error UI for specific parts of an app',
-  //     },
-  //     {
-  //       slug: 'not-found',
-  //       name: 'Not Found',
-  //       description: 'Create Not Found UI for specific parts of an app',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'Caching',
-  //   items: [
-  //     {
-  //       slug: 'cached-routes',
-  //       name: 'Cached Route Segments',
-  //       nav_title: 'Cached Routes',
-  //       description: 'Cache the rendered output of a route segment',
-  //     },
-  //     {
-  //       slug: 'cached-components',
-  //       name: 'Cached React Server Components',
-  //       nav_title: 'Cached Components',
-  //       description:
-  //         'Cache the rendered output of an individual React Server Component',
-  //     },
-  //     {
-  //       slug: 'cached-functions',
-  //       name: 'Cached Functions',
-  //       description: 'Cache the computed result of a regular function',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'APIs',
-  //   items: [
-  //     {
-  //       slug: 'use-link-status',
-  //       name: 'useLinkStatus',
-  //       description: 'Create inline visual feedback for link interactions',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'Misc',
-  //   items: [
-  //     {
-  //       slug: 'view-transitions',
-  //       name: 'View Transitions',
-  //       description:
-  //         'Use animations to help users understand the relationship between the two views',
-  //     },
-  //     {
-  //       slug: 'context',
-  //       name: 'Client Context',
-  //       description:
-  //         'Pass context between Client Components that cross Server/Client Component boundary',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'Layouts',
+    items: [
+      {
+        slug: 'layouts',
+        name: 'Nested Layouts',
+        description: 'Create UI that is shared across routes',
+      },
+      {
+        slug: 'route-groups',
+        name: 'Route Groups',
+        description: 'Organize routes without affecting URL paths',
+      },
+      {
+        slug: 'parallel-routes',
+        name: 'Parallel Routes',
+        description: 'Render multiple pages in the same layout',
+      },
+    ],
+  },
+  {
+    name: 'File Conventions',
+    items: [
+      {
+        slug: 'loading',
+        name: 'Loading',
+        description:
+          'Create meaningful Loading UI for specific parts of an app',
+      },
+      {
+        slug: 'error',
+        name: 'Error',
+        description: 'Create Error UI for specific parts of an app',
+      },
+      {
+        slug: 'not-found',
+        name: 'Not Found',
+        description: 'Create Not Found UI for specific parts of an app',
+      },
+    ],
+  },
+  {
+    name: 'Caching',
+    items: [
+      {
+        slug: 'cached-routes',
+        name: 'Cached Route Segments',
+        nav_title: 'Cached Routes',
+        description: 'Cache the rendered output of a route segment',
+      },
+      {
+        slug: 'cached-components',
+        name: 'Cached React Server Components',
+        nav_title: 'Cached Components',
+        description:
+          'Cache the rendered output of an individual React Server Component',
+      },
+      {
+        slug: 'cached-functions',
+        name: 'Cached Functions',
+        description: 'Cache the computed result of a regular function',
+      },
+    ],
+  },
+  {
+    name: 'APIs',
+    items: [
+      {
+        slug: 'use-link-status',
+        name: 'useLinkStatus',
+        description: 'Create inline visual feedback for link interactions',
+      },
+    ],
+  },
+  {
+    name: 'Misc',
+    items: [
+      {
+        slug: 'view-transitions',
+        name: 'View Transitions',
+        description:
+          'Use animations to help users understand the relationship between the two views',
+      },
+      {
+        slug: 'context',
+        name: 'Client Context',
+        description:
+          'Pass context between Client Components that cross Server/Client Component boundary',
+      },
+    ],
+  },
 ] as const satisfies DemoCategory[];
 
 export type DemoSlug = (typeof demos)[number]['items'][number]['slug'];

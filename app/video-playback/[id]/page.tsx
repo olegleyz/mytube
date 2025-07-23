@@ -1,17 +1,26 @@
+'use cache';
+
 import db from '#/lib/db';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import DashPlayer from '../_components/DashPlayer';
 
-interface VideoDetailPageProps {
-  params: {
-    id: string;
-  };
+export async function generateStaticParams() {
+  const videos = db.video.findMany();
+
+  return videos.map((video) => ({ id: video.id }));
 }
 
-export default function VideoDetailPage({ params }: VideoDetailPageProps) {
-  const video = db.video.find({ where: { id: params.id } });
+interface VideoDetailPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function VideoDetailPage({ params }: VideoDetailPageProps) {
+  const { id } = await params;
+  const video = db.video.find({ where: { id } });
 
   if (!video) {
     notFound();

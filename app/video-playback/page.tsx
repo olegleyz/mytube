@@ -2,7 +2,7 @@ import db from '#/lib/db';
 import Link from 'next/link';
 import { format } from 'date-fns';
 
-export default function VideoPlaybackPage() {
+export default async function VideoPlaybackPage() {
   const videos = db.video.findMany();
 
   return (
