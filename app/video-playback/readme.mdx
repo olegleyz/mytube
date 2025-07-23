@@ -1,0 +1,48 @@
+# Video Playback 101
+
+To play a video in a browser using adaptive streaming, the system must go through several steps after a raw video is uploaded.
+
+## 1. Transcoding and Chunking
+
+The raw video is transcoded into formats like **DASH (MPEG-DASH)** or **HLS (HTTP Live Streaming)**. Transcoding includes:
+
+* **Splitting the video into small segments**, usually 2 to 10 seconds long. This allows the player to start playing the video as soon as it receives the first chunk.
+* **Creating multiple versions** of the video at different resolutions and bitrates (e.g. 240p, 480p, 720p). This allows the player to adjust quality based on network speed.
+* **Generating a manifest file**, which lists available video qualities and the paths to the video chunks.
+
+These chunks and the manifest file are stored in blob storage (like S3) and cached in CDN (like CloudFront).
+
+## 2. Serving the Video
+
+The backend provides a REST API for clients to fetch metadata and a manifest URL:
+
+```
+GET /videos/:videoId
+```
+
+This returns information like title, duration, thumbnail, and a URL to the manifest file. We want to protect access to the manifest and segments using signed URLs or access tokens to prevent unauthorized or excessive access.
+
+## 3. Playback in the Browser
+
+On the frontend:
+
+* A video player library like **dash.js** or **hls.js** takes the manifest URL.
+* The player reads the manifest to:
+
+  * Select a resolution based on current network conditions.
+  * Download video chunks as needed.
+  * Buffer and decode them for playback.
+
+The player handles switching resolutions if the connection improves or degrades.
+
+## 4. Notes
+
+* **DASH** is an open standard. Not supported natively on Safari, but works with dash.js.
+* **HLS** is developed by Apple. Natively supported on Safari and iOS.
+* Shorter chunks improve startup time and responsiveness, but increase request overhead.
+* You can secure video access using signed URLs or access tokens if needed.
+
+## Links
+
+- [DASH](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP)
+- [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming)

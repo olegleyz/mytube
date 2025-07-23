@@ -26,7 +26,7 @@ export function GlobalNav({ items }: { items: DemoCategory[] }) {
           </div>
 
           <h3 className="text-lg font-medium text-gray-200 group-hover:text-white">
-            Playground
+            MyTube
           </h3>
         </Link>
       </div>

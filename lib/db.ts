@@ -11,7 +11,12 @@ import {
   type DemoSlug,
   type Product,
   type Section,
+  type Video,
 } from '../app/_internal/_data';
+
+type VideoWhere = { id?: string; title?: string; description?: string };
+
+type VideoFindOptions = { where?: VideoWhere; limit?: number };
 
 type ProductWhere = { id?: string; category?: string; section?: string };
 
@@ -30,6 +35,60 @@ type DemoWhere = { slug?: DemoSlug };
 type DemoFindOptions = { where?: DemoWhere };
 
 const db = {
+  video: {
+    find: (options: VideoFindOptions) => {
+      let video: Video | undefined;
+      if (options.where?.id !== undefined) {
+        video = data.videos.find((v) => v.id === options.where?.id);
+      } else if (options.where?.title !== undefined) {
+        video = data.videos.find((v) => v.title === options.where?.title);
+      } else if (options.where?.description !== undefined) {
+        video = data.videos.find((v) => v.description === options.where?.description);
+      }
+
+      let prev: string | undefined = undefined;
+      let next: string | undefined = undefined;
+
+      if (video) {
+        const ids = data.videos.map((p) => Number(p.id));
+        const currentIndex = ids.indexOf(Number(video.id));
+        const prevIndex = (currentIndex - 1 + ids.length) % ids.length;
+        const nextIndex = (currentIndex + 1) % ids.length;
+
+        prev = data.videos[prevIndex]?.id;
+        next = data.videos[nextIndex]?.id;
+      }
+
+      return video ? { ...video, prev, next } : null;
+    },
+    findMany: (options: VideoFindOptions = {}) => {
+      let result = data.videos;
+
+      if (options.where?.id) {
+        result = result.filter((video) => video.id === options.where!.id);
+      }
+
+      if (options.where?.title) {
+        const titleQuery = options.where.title;
+        result = result.filter(
+          (video) => video.title.includes(titleQuery),
+        );
+      }
+
+      if (options.where?.description) {
+        const descriptionQuery = options.where.description;
+        result = result.filter(
+          (video) => video.description.includes(descriptionQuery),
+        );
+      }
+
+      if (options.limit !== undefined) {
+        result = result.slice(0, options.limit);
+      }
+
+      return result;
+    },
+  },
   product: {
     find: (options: ProductFindOptions) => {
       let product: Product | undefined;
@@ -184,4 +243,4 @@ const db = {
 
 export default db;
 
-export type { Demo, Product, Section, Category, DemoCategory };
+export type { Demo, Product, Section, Category, DemoCategory, Video };

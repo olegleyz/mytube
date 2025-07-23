@@ -3,6 +3,17 @@
 // a relational database like PostgreSQL or MySQL, accessed through
 // a database client or ORM.
 
+export type Video = {
+  id: string;
+  title: string;
+  description: string;
+  manifestUrl: string;
+  thumbnailUrl: string;
+  duration: number;
+  uploadDate: string;
+  publisher: string;
+};
+
 export type Product = {
   id: string;
   name: string;
@@ -69,6 +80,19 @@ const categories: Category[] = [
   },
 ];
 
+const videos: Video[] = [
+  {
+    id: "video_123",
+    title: "My first video title",
+    description: "My first video description",
+    manifestUrl: "https://rhsgjcpv318gpqak.public.blob.vercel-storage.com/videos/processed/video_123/manifest.mpd",
+    thumbnailUrl: "s3://mytube/oleg_123/2025-07-22T19:54:09-07:00/oleg_123.png",
+    duration: 23,
+    uploadDate: '2025-07-22T19:54:09-07:00',
+    publisher: 'oleg_123'
+  },
+];
+
 const products: Product[] = [
   { id: '1', name: 'Top', image: 'top.png', category: '1' },
   { id: '2', name: 'Shorts', image: 'shorts.png', category: '2' },
@@ -84,98 +108,108 @@ const products: Product[] = [
 
 const demos = [
   {
-    name: 'Layouts',
+    name: 'MyTube',
     items: [
       {
-        slug: 'layouts',
-        name: 'Nested Layouts',
-        description: 'Create UI that is shared across routes',
-      },
-      {
-        slug: 'route-groups',
-        name: 'Route Groups',
-        description: 'Organize routes without affecting URL paths',
-      },
-      {
-        slug: 'parallel-routes',
-        name: 'Parallel Routes',
-        description: 'Render multiple pages in the same layout',
+        slug: 'video-playback',
+        name: 'Video Playback',
+        description: 'Streaming a video in a web browser',
       },
     ],
   },
-  {
-    name: 'File Conventions',
-    items: [
-      {
-        slug: 'loading',
-        name: 'Loading',
-        description:
-          'Create meaningful Loading UI for specific parts of an app',
-      },
-      {
-        slug: 'error',
-        name: 'Error',
-        description: 'Create Error UI for specific parts of an app',
-      },
-      {
-        slug: 'not-found',
-        name: 'Not Found',
-        description: 'Create Not Found UI for specific parts of an app',
-      },
-    ],
-  },
-  {
-    name: 'Caching',
-    items: [
-      {
-        slug: 'cached-routes',
-        name: 'Cached Route Segments',
-        nav_title: 'Cached Routes',
-        description: 'Cache the rendered output of a route segment',
-      },
-      {
-        slug: 'cached-components',
-        name: 'Cached React Server Components',
-        nav_title: 'Cached Components',
-        description:
-          'Cache the rendered output of an individual React Server Component',
-      },
-      {
-        slug: 'cached-functions',
-        name: 'Cached Functions',
-        description: 'Cache the computed result of a regular function',
-      },
-    ],
-  },
-  {
-    name: 'APIs',
-    items: [
-      {
-        slug: 'use-link-status',
-        name: 'useLinkStatus',
-        description: 'Create inline visual feedback for link interactions',
-      },
-    ],
-  },
-  {
-    name: 'Misc',
-    items: [
-      {
-        slug: 'view-transitions',
-        name: 'View Transitions',
-        description:
-          'Use animations to help users understand the relationship between the two views',
-      },
-      {
-        slug: 'context',
-        name: 'Client Context',
-        description:
-          'Pass context between Client Components that cross Server/Client Component boundary',
-      },
-    ],
-  },
+  // {
+  //   name: 'Layouts',
+  //   items: [
+  //     {
+  //       slug: 'layouts',
+  //       name: 'Nested Layouts',
+  //       description: 'Create UI that is shared across routes',
+  //     },
+  //     {
+  //       slug: 'route-groups',
+  //       name: 'Route Groups',
+  //       description: 'Organize routes without affecting URL paths',
+  //     },
+  //     {
+  //       slug: 'parallel-routes',
+  //       name: 'Parallel Routes',
+  //       description: 'Render multiple pages in the same layout',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'File Conventions',
+  //   items: [
+  //     {
+  //       slug: 'loading',
+  //       name: 'Loading',
+  //       description:
+  //         'Create meaningful Loading UI for specific parts of an app',
+  //     },
+  //     {
+  //       slug: 'error',
+  //       name: 'Error',
+  //       description: 'Create Error UI for specific parts of an app',
+  //     },
+  //     {
+  //       slug: 'not-found',
+  //       name: 'Not Found',
+  //       description: 'Create Not Found UI for specific parts of an app',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'Caching',
+  //   items: [
+  //     {
+  //       slug: 'cached-routes',
+  //       name: 'Cached Route Segments',
+  //       nav_title: 'Cached Routes',
+  //       description: 'Cache the rendered output of a route segment',
+  //     },
+  //     {
+  //       slug: 'cached-components',
+  //       name: 'Cached React Server Components',
+  //       nav_title: 'Cached Components',
+  //       description:
+  //         'Cache the rendered output of an individual React Server Component',
+  //     },
+  //     {
+  //       slug: 'cached-functions',
+  //       name: 'Cached Functions',
+  //       description: 'Cache the computed result of a regular function',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'APIs',
+  //   items: [
+  //     {
+  //       slug: 'use-link-status',
+  //       name: 'useLinkStatus',
+  //       description: 'Create inline visual feedback for link interactions',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'Misc',
+  //   items: [
+  //     {
+  //       slug: 'view-transitions',
+  //       name: 'View Transitions',
+  //       description:
+  //         'Use animations to help users understand the relationship between the two views',
+  //     },
+  //     {
+  //       slug: 'context',
+  //       name: 'Client Context',
+  //       description:
+  //         'Pass context between Client Components that cross Server/Client Component boundary',
+  //     },
+  //   ],
+  // },
 ] as const satisfies DemoCategory[];
 
 export type DemoSlug = (typeof demos)[number]['items'][number]['slug'];
 
-export const data = { sections, categories, products, demos };
+export const data = { sections, categories, products, demos, videos };
